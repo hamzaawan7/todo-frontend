@@ -1,0 +1,45 @@
+<div class="container my-4">
+  <h2>Task List</h2>
+  <form class="row g-3">
+    <div class="col-md-6">
+      <input #taskInput class="form-control" type="text" placeholder="New Task"/>
+    </div>
+    <div class="col-md-4">
+      <input #deadlineInput class="form-control" type="date"/>
+    </div>
+    <div class="col-md-2">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addTask(taskInput.value, deadlineInput.value); taskInput.value = ''; deadlineInput.value = '';"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+
+  <table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Task</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Completed</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of tasks; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td [style.textDecoration]="task.completed ? 'line-through' : 'none'">{{ task.title }}</td>
+      <td>{{ task.deadline || 'No Deadline' }}</td>
+      <td>
+        <input type="checkbox" [checked]="task.completed" (click)="toggleCompletion(task)"/>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeTask(task)">Remove</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

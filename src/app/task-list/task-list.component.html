@@ -32,7 +32,7 @@
     <tr *ngFor="let task of tasks; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td [style.textDecoration]="task.completed ? 'line-through' : 'none'">{{ task.title }}</td>
-      <td>{{ task.deadline || 'No Deadline' }}</td>
+      <td>{{ task.deadline | date: 'medium' }}</td>
       <td>
         <input type="checkbox" [checked]="task.completed" (click)="toggleCompletion(task)"/>
       </td>

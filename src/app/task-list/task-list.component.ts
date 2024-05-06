@@ -45,5 +45,9 @@ export class TaskListComponent {
   // Toggle task completion status (local change)
   toggleCompletion(task: Task): void {
     task.completed = !task.completed;
+    this.taskService.updateTask(task).subscribe(() => {
+      // Resort tasks after updating completion status
+      this.tasks = this.tasks.sort((a, b) => Number(a.completed) - Number(b.completed));
+    });
   }
 }
